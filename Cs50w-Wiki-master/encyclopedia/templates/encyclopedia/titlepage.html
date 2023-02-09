@@ -1,0 +1,34 @@
+{% extends "encyclopedia/layout.html" %}
+{% block title %}
+    
+    <meta charset="utf-8">
+    {{title}} 
+    <style>
+        .jb-red { 
+            color: red;
+        }
+    </style>
+
+{% endblock %}
+
+{% block body %}
+
+
+{% load md %}
+    
+
+    
+    <form action="{% url 'wiki:edit'  %}" method = "POST">
+        {% csrf_token %}
+        
+        {% with pagename=title %}    
+        
+        <button type="submit"  name = "edit" value="{{pagename}}" id ="edit">edit</button>
+        
+        {%endwith%}
+        <h1 class="jb-red">{{title}}</h1>
+
+    </form>
+    {{ content|markdown|safe }}
+
+{% endblock %}
